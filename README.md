@@ -1,6 +1,6 @@
 # battleship
 Battleship Game in Julia
-(V0.6)
+(V0.6.2)
 
 ## Rules
 Two-player game where every player owns ships in a separate map

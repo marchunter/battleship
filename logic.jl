@@ -81,8 +81,8 @@ function update_game!(guess, info_map, actual_map, ship_tensor)
 		game_state = 1
 		# check whether a ship was sunk
 
-		temprw, tempcl, ship_id = findn(ship_tensor[row_guess,col_guess, :])
-		#println("ship number ", ship_id, " was hit")
+		ship_id = findn(ship_tensor[row_guess,col_guess, :])
+		println("ship number ", ship_id, " was hit")
 
 		diffmap = ship_tensor[:,:, ship_id] - info_map
 		if maximum(diffmap) < 2
