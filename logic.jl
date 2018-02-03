@@ -1,5 +1,5 @@
 # sinkships for julia
-
+module bslogic
 function create_ships(mapsize, shiplist)
 	# shiplist gives the number of ships for each size
 	# e.g. [2,0,0,1] means 2 1-field and one 4-field ship
@@ -103,9 +103,10 @@ function update_game!(guess, info_map, actual_map, ship_tensor)
 	return info_map, game_state
 end
 
+end # end module
 
 # testing
-
+#=
 mapsize = (7, 7)
 shiplist = [2,0,1]
 
@@ -152,4 +153,7 @@ if game_state == 3
 else
 	println("Game was lost")
 end
+=#
+println("module battleship logic loaded")
+
 
