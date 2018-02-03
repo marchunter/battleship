@@ -52,9 +52,9 @@ function create_ships(mapsize, shiplist)
 					ship_count += 1
 					ship_tensor[row, col, ship_count] = 1
 				break
-				end 
+				end
 				if count == 1000
-					println("WARNING, no space found on map. A ship of size ", shipsize, 
+					println("WARNING, no space found on map. A ship of size ", shipsize,
 						" has not been placed. Make sure the map is big enough to contain all the ships. ",
 						"Bare in mind that ships need to be separated by at least one field of water ",
 						"(also diagonally)")
@@ -74,7 +74,7 @@ function update_game!(guess, info_map, actual_map, ship_tensor)
 	println("Guess was ", guess)
 	row_guess = guess[1]
 	col_guess = guess[2]
-	info_map[row_guess, col_guess] = actual_map[row_guess, col_guess] 
+	info_map[row_guess, col_guess] = actual_map[row_guess, col_guess]
 	#println(actual_map[row_guess, col_guess])
 	# check when there is a hit
 	if actual_map[row_guess, col_guess] == 1
@@ -95,7 +95,7 @@ function update_game!(guess, info_map, actual_map, ship_tensor)
 		if maximum(diffmap) < 2
 			game_state = 3
 		end
-	else 
+	else
 		game_state = 0
 	end
 
@@ -155,5 +155,3 @@ else
 end
 =#
 println("module battleship logic loaded")
-
-

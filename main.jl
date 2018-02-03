@@ -5,8 +5,10 @@ using gemc
 
 
 # testing
+I = 4
+J = 4
+mapsize = (I, J)
 
-mapsize = (5, 5)
 shiplist = [2,0,1]
 
 actual_map, ship_tensor = bslogic.create_ships(mapsize, shiplist)
@@ -19,12 +21,24 @@ println(actual_map)
 #println("ship tensor")
 #println(ship_tensor)
 
-max_turns = 50
+max_turns = 500
 n_turns = 0
 game_state = 0
+statehistory = []
+actionhistory = []
+valuehistory = []
+epsilon = 0.9
+
 for i = 1:max_turns
-	info_map, game_state = bslogic.update_game!([rand(1:mapsize[1]) rand(1:mapsize[2])], info_map, actual_map, ship_tensor)
+	action, statehistory, actionhistory, valuehistory = gemc.eval_actions(info_map, actual_map, ship_tensor, epsilon, statehistory, actionhistory, valuehistory)
+
+	# get row and column indices
+	col = mod(action -1, J) + 1
+	row = floor(Int,((action - col) / I) + 1)
+
+	info_map, game_state = bslogic.update_game!([row col], info_map, actual_map, ship_tensor)
 	println("game state ", game_state)
+
 
 	if game_state == 3
 		println("All ships are sunk after ", i, " turns.")
@@ -55,5 +69,3 @@ end
 
 ##
 println("testing")
-
-find
