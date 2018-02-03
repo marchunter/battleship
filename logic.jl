@@ -6,7 +6,7 @@ function create_ships(mapsize, shiplist)
 	initmap = -ones(mapsize)
 	m,n = mapsize[1], mapsize[2]
 	#println(initmap)
-	println("Following number of ships with increasing number are being created ", shiplist)
+	#println("Following number of ships with increasing number are being created ", shiplist)
 	maxshiplength = length(shiplist)
 
 	# ship tensor is an overlay of single-ship maps
@@ -17,7 +17,7 @@ function create_ships(mapsize, shiplist)
 	for (i, n_ships) in enumerate(reverse(shiplist))
 		for j = 1:n_ships
 			shipsize = maxshiplength - i + 1
-			println("Inserting ship of size ", shipsize)
+			#println("Inserting ship of size ", shipsize)
 			for count = 1:100
 				# randomized ship position
 				rand_hor_vert = rand(0:1)
@@ -71,7 +71,7 @@ end
 
 
 function update_game!(guess, info_map, actual_map, ship_tensor)
-	println("Guess was ", guess)
+	#println("Guess was ", guess)
 	row_guess = guess[1]
 	col_guess = guess[2]
 	info_map[row_guess, col_guess] = actual_map[row_guess, col_guess]
@@ -82,12 +82,12 @@ function update_game!(guess, info_map, actual_map, ship_tensor)
 		# check whether a ship was sunk
 
 		ship_id = findn(ship_tensor[row_guess,col_guess, :])
-		println("ship number ", ship_id, " was hit")
+		#println("ship number ", ship_id, " was hit")
 
 		diffmap = ship_tensor[:,:, ship_id] - info_map
 		if maximum(diffmap) < 2
 			game_state = 2
-			println("ship number ", ship_id, " was sunk")
+			#println("ship number ", ship_id, " was sunk")
 		end
 
 		# check whether all ships are sunk
@@ -104,54 +104,3 @@ function update_game!(guess, info_map, actual_map, ship_tensor)
 end
 
 end # end module
-
-# testing
-#=
-mapsize = (7, 7)
-shiplist = [2,0,1]
-
-actual_map, ship_tensor = create_ships(mapsize, shiplist)
-
-info_map = -ones(mapsize)
-
-println("actual map state")
-println(actual_map)
-
-#println("ship tensor")
-#println(ship_tensor)
-
-max_turns = 120
-n_turns = 0
-game_state = 0
-for i = 1:max_turns
-	info_map, game_state = update_game!([rand(1:mapsize[1]) rand(1:mapsize[2])], info_map, actual_map, ship_tensor)
-	println("game state ", game_state)
-
-	if game_state == 3
-		println("All ships are sunk after ", i, " turns.")
-		n_turns = i
-		break
-	end
-	if i == max_turns
-		println("Game over after ", i, " turns.")
-		n_turns = i
-	end
-end
-
-
-# Game stats
-println("--- ____ _____ ---")
-println("--- Game Stats ---")
-println("--- ____ _____ ---")
-println("actual map state")
-println(actual_map)
-println("info map state")
-println(info_map)
-println("Turns: ", n_turns)
-if game_state == 3
-	println("Game was won")
-else
-	println("Game was lost")
-end
-=#
-println("module battleship logic loaded")
