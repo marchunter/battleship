@@ -43,7 +43,7 @@ function eval_actions(info_map, actual_map, ship_tensor, epsilon, statehistory, 
     #println("matching_states: ", " l ", length(matching_states))
 
     # greedy epsilon monte carlo
-    if rand(0:100) > epsilon*100
+    if rand(1:100) > epsilon*100
         #println("valuehistory: ", valuehistory, " l ", length(valuehistory))
         #println("actionhistory: ", actionhistory, " l ", length(actionhistory))
         #println("statehistory: ", " l ", size(statehistory))
@@ -88,7 +88,8 @@ function rank_action(action_idx, valuehistory, game_state)
         println("WARNING: game state unknown")
     end
 
-    valuehistory[action_idx] += added_value
+    valuehistory[action_idx] +=  added_value
+    # NOT implemented yet: V += alpha * (Gt - V);
     return valuehistory
 end
 

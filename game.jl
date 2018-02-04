@@ -56,8 +56,8 @@ function play_bsgame(mapsize, shiplist,  max_turns, epsilon, statehistory, actio
 		println("Game was lost")
 	end
 	=#
-	
-	return statehistory, actionhistory, valuehistory
+
+	return statehistory, actionhistory, valuehistory, n_turns
 end
 
 
